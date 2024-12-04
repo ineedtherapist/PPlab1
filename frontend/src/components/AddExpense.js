@@ -3,9 +3,9 @@ import { useState } from 'react';
 import axios from '../axios'; // axios для запитів
 
 const AddExpense = () => {
-    const [category, setCategory] = useState('');
-    const [amount, setAmount] = useState('');
     const [description, setDescription] = useState('');
+    const [cost, setCost] = useState('');
+    const [expanse_name, setExpanseName] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
@@ -13,22 +13,22 @@ const AddExpense = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!category || !amount || !description) {
+        if (!description || !cost || !expanse_name) {
             setError('Будь ласка, заповніть всі поля');
             return;
         }
 
         // Створення об'єкта витрати
-        const expense = { category, amount: parseFloat(amount), description };
+        const expense = { description, cost: parseFloat(cost), expanse_name };
 
         try {
             // Надсилання POST-запиту на сервер для додавання витрати
-            const response = await axios.post('/api/expenses', expense);
+            await axios.post('/api/expenses', expense);  // тут не потрібно зберігати response
 
             // Очищення полів форми після успішного додавання
-            setCategory('');
-            setAmount('');
             setDescription('');
+            setCost('');
+            setExpanseName('');
 
             setSuccess('Витрата успішно додана!');
             setError('');
@@ -45,30 +45,30 @@ const AddExpense = () => {
                 {error && <p style={{ color: 'red' }}>{error}</p>}
                 {success && <p style={{ color: 'green' }}>{success}</p>}
                 <div>
-                    <label htmlFor="category">Назва витрати:</label>
-                    <input
-                        type="text"
-                        id="category"
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="amount">Сума:</label>
-                    <input
-                        type="number"
-                        id="amount"
-                        value={amount}
-                        onChange={(e) => setAmount(e.target.value)}
-                    />
-                </div>
-                <div>
                     <label htmlFor="description">Опис:</label>
                     <input
                         type="text"
                         id="description"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="cost">Сума:</label>
+                    <input
+                        type="number"
+                        id="cost"
+                        value={cost}
+                        onChange={(e) => setCost(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="expanse_name">Категорія витрати:</label>
+                    <input
+                        type="text"
+                        id="expanse_name"
+                        value={expanse_name}
+                        onChange={(e) => setExpanseName(e.target.value)}
                     />
                 </div>
                 <button type="submit">Додати витрату</button>

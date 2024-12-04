@@ -1,19 +1,21 @@
 // backend/models/Expense.js
 const mongoose = require('mongoose');
 
+// Оновлена схема витрат
 const expenseSchema = new mongoose.Schema({
-    category: {
-        type: String,
-        required: true,
-    },
-    amount: {
-        type: Number,
-        required: true,
-    },
     description: {
         type: String,
-        required: true,
+        required: true, // Опис витрати обов'язковий
     },
+    cost: {
+        type: Number,
+        required: true, // Сума витрати обов'язкова
+    },
+    expanse_name: {
+        type: String,
+        required: true, // Назва витрати обов'язкова
+    }
+}, {
 });
 
 const Expense = mongoose.model('Expense', expenseSchema);

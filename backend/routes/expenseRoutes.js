@@ -1,25 +1,29 @@
 // backend/routes/expenses.js
 const express = require('express');
 const router = express.Router();
-const Expense = require('../models/Expense'); // Модель витрат
+const Expense = require('../models/Expense'); // Оновлена модель витрат
 
 // Додавання витрати
 router.post('/', async (req, res) => {
-    const { category, amount, description } = req.body;
+    const { description, cost, expanse_name } = req.body;
 
-    if (!category || !amount || !description) {
+    if (!description || !cost || !expanse_name) {
         return res.status(400).json({ message: 'Будь ласка, заповніть всі поля.' });
     }
 
     try {
+        // Створення нової витрати на основі отриманих даних
         const newExpense = new Expense({
-            category,
-            amount,
-            description
+            description,
+            cost: parseFloat(cost), // Перетворюємо суму на число
+            expanse_name,
         });
 
-        await newExpense.save(); // Зберігаємо нову витрату в базу даних
-        res.status(201).json(newExpense); // Відправляємо відповідь з новою витратою
+        // Збереження витрати в базі даних
+        await newExpense.save();
+
+        // Відправляємо відповідь з новою витратою
+        res.status(201).json(newExpense);
     } catch (error) {
         console.error('Error adding expense:', error);
         res.status(500).json({ message: 'Щось пішло не так!' });

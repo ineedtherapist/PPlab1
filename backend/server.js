@@ -2,12 +2,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const expensesRouter = require('./routes/expenses'); // Підключаємо маршрут витрат
+const expensesRouter = require('./routes/expenseRoutes'); // Підключаємо маршрут витрат
+const cors = require('cors');
 
 dotenv.config();
 
 const app = express();
 app.use(express.json()); // Для обробки JSON запитів
+
+app.use(cors());
 
 // Підключення до MongoDB
 mongoose.connect(process.env.MONGO_URI, {
