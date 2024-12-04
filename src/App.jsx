@@ -1,4 +1,5 @@
-// frontend/src/App.js
+// frontend/src/App.jsx
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AddExpense from './components/AddExpense';
 import ExpenseList from './components/ExpenseList';

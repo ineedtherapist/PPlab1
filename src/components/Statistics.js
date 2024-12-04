@@ -1,6 +1,7 @@
 // frontend/src/components/Statistics.js
+import React from 'react';
 import { useEffect, useState } from 'react';
-import axios from '../axios'; // Використовуємо axios для запитів
+import axios from '../services/axios'; // Використовуємо axios для запитів
 
 const Statistics = () => {
     const [totalAmount, setTotalAmount] = useState(0);

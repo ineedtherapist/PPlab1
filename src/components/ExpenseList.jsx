@@ -1,6 +1,7 @@
-// frontend/src/components/ExpenseList.js
+// frontend/src/components/ExpenseList.jsx
+import React from 'react';
 import { useEffect, useState } from 'react';
-import axios from '../axios'; // Використовуємо axios для запитів
+import axios from '../services/axios'; // Використовуємо axios для запитів
 
 const ExpenseList = () => {
     const [expenses, setExpenses] = useState([]);
